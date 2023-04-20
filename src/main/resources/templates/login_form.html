@@ -1,0 +1,222 @@
+<!--작성자 Jun hee-->
+<!doctype html>
+<html lang="en">
+
+<!-- 타임리프 -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Today's Flower!</title>
+<style>
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.row {
+	background: white;
+	box-shadow: 5px 5px 22px grey;
+	/* border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+            border-top-right-radius: 30px;
+            border-bottom-right-radius: 30px; */
+}
+
+/* img{
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+        }  */
+.btn1 {
+	border: none;
+	outline: none;
+	height: 50px;
+	width: 100%;
+	background-color: #717fe0;
+	color: white;
+	border-radius: 4px;
+	font-weight: bold;
+}
+
+.btn1:hover {
+	background: white;
+	border: 1px solid;
+	color: black;
+}
+</style>
+<!-- Bootstrap CSS begin-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
+<!-- Bootstrap CSS end-->
+
+</head>
+<body>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+	<!-- Login form begin-->
+	<section class="Form">
+		<div class="container">
+			<div class="row g-0">
+				<div class="col-lg-5">
+					<img th:src="@{/img/Login/Login_flower3.jpg}" class="img_login"
+						width="500" height="650">
+				</div>
+				<div class="col-lg-7 px-5 pt-5">
+					<h3 class="font-weight-bold py-3">
+						<strong>회원 로그인</strong>
+					</h3>
+					<p style="color: gray;">가입하신 아이디와 비밀번호를 입력해주세요.</p>
+
+
+
+					<form th:action="@{/user/login}" method="post">
+						<div th:if="${param.error}">
+							<div class="alert alert-danger">사용자ID 또는 비밀번호를 확인해 주세요.</div>
+						</div>
+				<div class="form-row">
+						<div class="col-lg-7">
+						     <label for="username" class="form-label">사용자ID</label>
+            <input type="text" placeholder="MEMBER ID" name="username" id="username" class="form-control my-3 p-3" 
+            style="width:650px;">
+						</div>
+							</div>
+
+						<div class="form-row">
+							<div class="col-lg-7">
+								 <label for="password" class="form-label">비밀번호</label>
+            <input type="password" placeholder="PASSWORD" name="password" id="password" class="form-control my-3 p-3"
+            style="width:650px;">
+            
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-lg-7">
+								<button type="submit" class="btn btn-primary"
+									style="width: 650px; height: 50px;">로그인</button>
+								
+								
+							</div>
+						</div>
+						<label><input type="checkbox" name="check" value="idsave">
+							아이디 저장</label>
+						<p style="color: gray">
+							아이디 혹은 비밀번호를 잊으셨나요? <a href="findid"><strong>아이디/비밀번호
+									찾기</strong></a>
+						</p>
+						<p style="color: gray">
+							아직 회원이 아니신가요? <a class="nav-link" th:href="@{/user/signup}">회원가입</a>
+						</p>
+						<div class="form-row">
+							<div class="col-lg-7">
+								<a id="btn-kakao-login" href="kakao/login"> <img
+									src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+									width="300" height="60" alt="카카오 로그인 버튼" />
+								</a>
+								<div id="naverIdLogin"></div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Login form end-->
+
+
+
+
+
+
+
+
+
+	<!-- JS bootstrap begin-->
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+		integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+		crossorigin="anonymous"></script>
+	<!-- JS bootstrap end-->
+
+	<!-- 카카오 스크립트 -->
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script>
+		Kakao.init('8890a67c089173194979845f9389950d'); //발급받은 키 중 javascript키를 사용해준다.
+		console.log(Kakao.isInitialized()); // sdk초기화여부판단
+		//카카오로그인
+		function kakaoLogin() {
+			Kakao.Auth.login({
+				success : function(response) {
+					Kakao.API.request({
+						url : '/v2/user/me',
+						success : function(response) {
+							console.log(response)
+						},
+						fail : function(error) {
+							console.log(error)
+						},
+					})
+				},
+				fail : function(error) {
+					console.log(error)
+				},
+			})
+		}
+		//카카오로그아웃  
+		function kakaoLogout() {
+			if (Kakao.Auth.getAccessToken()) {
+				Kakao.API.request({
+					url : '/v1/user/unlink',
+					success : function(response) {
+						console.log(response)
+					},
+					fail : function(error) {
+						console.log(error)
+					},
+				})
+				Kakao.Auth.setAccessToken(undefined)
+			}
+		}
+	</script>
+	<!-- 카카오 스크립트 끝-->
+
+	<!-- 네이버아디디로로그인 초기화 Script -->
+	<script type="text/javascript">
+		var naverLogin = new naver.LoginWithNaverId({
+			clientId : "개발자센터에 등록한 ClientID",
+			callbackUrl : "개발자센터에 등록한 callback Url",
+			isPopup : false, /* 팝업을 통한 연동처리 여부 */
+			loginButton : {
+				color : "green",
+				type : 3,
+				height : 60
+			}
+		/* 로그인 버튼의 타입을 지정 */
+		});
+
+		/* 설정정보를 초기화하고 연동을 준비 */
+		naverLogin.init();
+	</script>
+	<!-- // 네이버아이디로로그인 초기화 Script -->
+
+</body>
+</html>

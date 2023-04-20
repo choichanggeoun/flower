@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout1}">
+
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+        $(document).ready(function(){
+            $("#searchBtn").on("click",function(e) {
+                e.preventDefault();
+                page(0);
+            });
+        });
+
+        function page(page){
+            var searchSellStatus = $("#searchSellStatus").val();
+            var searchBy = $("#searchBy").val();
+            var searchQuery = $("#searchQuery").val();
+
+            location.href="/admin/items/" + page
+            + "?searchSellStatus=" + searchSellStatus
+            + "&searchBy=" + searchBy
+            + "&searchQuery=" + searchQuery;
+        }
+
+    </script>
+</th:block>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        select{
+            margin-right:10px;
+        }
+    </style>
+</th:block>
+
+<div layout:fragment="content">
+
+    <form th:action="@{'/admin/items/' + ${storeItems.number}}" role="form" method="get" th:object="${storeItems}">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>상품아이디</td>
+                <td>상품명</td>
+                <td>상태</td>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="storeItem, status: ${storeItems.getContent()}">
+                <td th:text="${storeItem.id}"></td>
+                <td>
+                    <a th:href="'/admin/itemfix/'+${storeItem.id}" th:text="${storeItem.itemNm}"></a>
+                </td>
+                <td th:text="${storeItem.itemSellStatus == T(com.today.flower.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div th:with="start=${(storeItems.number/maxPage)*maxPage + 1}, end=(${(storeItems.totalPages == 0) ? 1 : (start + (maxPage - 1) < storeItems.totalPages ? start + (maxPage - 1) : storeItems.totalPages)})" >
+            <ul class="pagination justify-content-center">
+
+                <li class="page-item" th:classappend="${storeItems.first}?'disabled'">
+                    <a th:onclick="'javascript:page(' + ${storeItems.number - 1} + ')'" aria-label='Previous' class="page-link">
+                        <span aria-hidden='true'>Previous</span>
+                    </a>
+                </li>
+
+                <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${storeItems.number eq page-1}?'active':''">
+                    <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
+                </li>
+
+                <li class="page-item" th:classappend="${storeItems.last}?'disabled'">
+                    <a th:onclick="'javascript:page(' + ${storeItems.number + 1} + ')'" aria-label='Next' class="page-link">
+                        <span aria-hidden='true'>Next</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="form-inline justify-content-center" th:object="${storeItemSearchDto}">
+            <select th:field="*{searchSellStatus}" class="form-control" style="width:auto;">
+                <option value="">판매상태(전체)</option>
+                <option value="SELL">판매</option>
+                <option value="SOLD_OUT">품절</option>
+            </select>
+            <select th:field="*{searchBy}" class="form-control" style="width:auto;">
+                <option value="itemNm">상품명</option>
+            </select>
+            <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">
+            <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
+        </div>
+    </form>
+
+</div>
+
+</html>

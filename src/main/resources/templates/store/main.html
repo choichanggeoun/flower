@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout1}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        .carousel-inner > .item {
+            height: 350px;
+        }
+        .margin{
+            margin-bottom:30px;
+        }
+        .banner{
+            height: 300px;
+            position: absolute; top:0; left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .card-text{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        a:hover{
+            text-decoration:none;
+        }
+        .center{
+            text-align:center;
+        }
+    </style>
+</th:block>
+
+<div layout:fragment="content">
+
+    <div id="carouselControls" class="carousel slide margin" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active item">
+                <img class="d-block w-100 banner" th:src="@{/img/logo3.png}" alt="Today`s Flower">
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" name="searchQuery" th:value="${storeSearchDto.searchQuery}">
+    <div th:if="${not #strings.isEmpty(storeSearchDto.searchQuery)}" class="center">
+        <p class="h3 font-weight-bold" th:text="${storeSearchDto.searchQuery} + '검색 결과'"></p>
+    </div>
+
+    <div class="row">
+        <th:block th:each="store, status: ${stores.getContent()}">
+            <div class="col-md-4 margin">
+                <div class="card">
+                    <a th:href="'/store/' +${store.storeId}" class="text-dark">
+                        <img th:src="${store.imgUrl}" class="card-img-top" th:alt="${store.storeName}" height="400">
+                        <div class="card-body">
+                            <h4 class="card-title">[[${store.storeName}]]</h4>
+                            <p class="card-text">[[${store.storeAddr}]]</p>
+                            <p class="card-text">[[${store.openTime}]]</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </th:block>
+    </div>
+
+    <div th:with="start=${(stores.number/maxPage)*maxPage + 1}, end=(${(stores.totalPages == 0) ? 1 : (start + (maxPage - 1) < stores.totalPages ? start + (maxPage - 1) : stores.totalPages)})" >
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item" th:classappend="${stores.number eq 0}?'disabled':''">
+                <a th:href="@{'/' + '?searchQuery=' + ${storeSearchDto.searchQuery} + '&page=' + ${stores.number-1}}" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'>Previous</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${stores.number eq page-1}?'active':''">
+                <a th:href="@{'/' +'?searchQuery=' + ${storeSearchDto.searchQuery} + '&page=' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
+            </li>
+
+            <li class="page-item" th:classappend="${stores.number+1 ge stores.totalPages}?'disabled':''">
+                <a th:href="@{'/' +'?searchQuery=' + ${storeSearchDto.searchQuery} + '&page=' + ${stores.number+1}}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'>Next</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+</div>

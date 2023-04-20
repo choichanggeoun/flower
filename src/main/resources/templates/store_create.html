@@ -1,0 +1,39 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container">
+    <h5 class="my-3 border-bottom pb-2">업체등록</h5>
+    <form th:action="@{/store/create}" th:object="${storeForm}" method="post">
+		<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+            <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </div>
+        <div class="mb-3">
+            <label for="storeName" class="form-label">업체명</label>
+            <input type="text" th:field="*{storeName}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="storeAddr" class="form-label">업체주소</label>
+            <input type="text" th:field="*{storeAddr}" class="form-control"></input>
+        </div>
+        <div class="mb-3">
+            <label for="openTime" class="form-label">운영시간</label>
+            <input type="text" th:field="*{openTime}" class="form-control"></input>
+        </div>
+        <div class="mb-3">
+            <label for="minAmount" class="form-label">최소주문금액(배달)</label>
+            <input type="text" th:field="*{minAmount}" class="form-control"></input>
+        </div>
+        <div class="mb-3">
+            <label for="deliveryTips" class="form-label">배달팁</label>
+            <input type="text" th:field="*{deliveryTips}" class="form-control"></input>
+        </div>
+        <div class="mb-3">
+            <label for="freeDelivery" class="form-label">무료배달금액</label>
+            <input type="text" th:field="*{freeDelivery}" class="form-control"></input>
+        </div>
+        <div class="mb-3">
+            <label for="pickupTime" class="form-label">픽업시간</label>
+            <input type="text" th:field="*{pickupTime}" class="form-control"></input>
+        </div>
+        <input type="submit" value="등록하기" class="btn btn-primary my-2">
+    </form>
+</div>
+</html>

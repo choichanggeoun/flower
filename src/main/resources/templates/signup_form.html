@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+<!-- 타임리프 -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  
+ 
+<head>
+    <title>Join</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      /* .row{
+            background: white;
+            box-shadow: 5px 5px 22px grey; 
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+            border-top-right-radius: 30px;
+            border-bottom-right-radius: 30px; 
+        } */
+
+      img {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+      }
+
+      .btn1 {
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 100%;
+        background-color: #717fe0;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      .btn2 {
+        border: 1px solid silver;
+        outline: none;
+        height: 50px;
+        width: 100%;
+        background-color: white;
+        color: black;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      .btn1:hover {
+        background: white;
+        border: 1px solid;
+        color: black;
+      }
+
+      .btn2:hover {
+        background: white;
+        border: 1px solid;
+        color: black;
+      }
+    </style>
+   
+	<!-- 수정 -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/fonts/linearicons-v1.0.0/icon-font.min.css}">
+	
+	<link rel="icon" type="image/png" th:href="@{/images/icons/favicon.png}">
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/MagnificPopup/magnific-popup.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/perfect-scrollbar/perfect-scrollbar.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/slick/slick.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+	
+	<!-- Bootstrap CSS begin-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Bootstrap CSS end-->
+</head>
+  <body class="animsition">
+ 	<!-- header -->
+	<header class="header-v2">
+		<div class="container-menu-desktop trans-03">
+			<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop p-l-45">	
+					
+					<!-- logo -->		
+					<a href="home" class="logo">
+						<!-- 수정 -->
+						<img th:src="@{/img/icons/logo3.png}">
+					</a>
+					
+					<!-- menu -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li class="active-menu">
+								<a href="home1">Home</a>
+							</li>
+							<li>
+								<a href="ci">Company Introduction</a>
+							</li>
+							<li>
+								<a href="#">Shop</a>
+							</li>
+							<li>
+								<a href="#">Customer Center</a>
+								<ul class="sub-menu">
+									<li><a href="notice">Notice</a></li>
+									<li><a href="faq">FAQ</a></li>
+									<li><a href="inqiry1">Inquiry</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>	
+					
+					<!-- icon -->
+					<div class="wrap-icon-header flex-w flex-r-m h-full">
+						<div class="flex-c-m h-full p-r-24">
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
+								<i class="zmdi zmdi-search"></i>
+							</div>
+						</div>
+						<div class="flex-c-m h-full p-l-18 p-r-25 bor5">
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="0">
+								<i class="zmdi zmdi-shopping-cart"></i>
+							</div>
+						</div>
+						<div class="flex-c-m h-full p-lr-19">
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-sidebar">
+								<i class="zmdi zmdi-menu"></i>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</div>	
+		</div>
+		
+		<!-- search -->
+		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<div class="container-search-header">
+				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+					
+					<!-- 수정 -->
+					<img th:src="@{/images/icons/icon-close2.png}">
+				</button>
+				<form class="wrap-search-header flex-w p-l-15">
+					<button class="flex-c-m trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+					<input class="plh3" type="text" name="search" placeholder="Search Shop">
+				</form>
+			</div>
+		</div>
+	</header>
+	
+	<!-- side menu -->
+	<aside class="wrap-sidebar js-sidebar">
+		<div class="s-full js-hide-sidebar"></div>
+		<div class="sidebar flex-col-l p-t-22 p-b-25">
+			<div class="flex-r w-full p-b-30 p-r-27">
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-sidebar">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			<div class="sidebar-content flex-w w-full p-lr-65 js-pscroll">
+				<ul class="sidebar-link w-full">
+					<li class="p-b-13">
+						<a href="login2" class="stext-102 cl2 hov-cl1 trans-04">
+							Login
+						</a>
+					</li>
+					<li class="p-b-13">
+						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
+							My Page
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</aside>
+	
+	<!-- cart -->
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Cart
+				</span>
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+						</div>
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							</a>
+							<span class="header-cart-item-info">
+							</span>
+						</div>
+					</li>
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+						</div>
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							</a>
+							<span class="header-cart-item-info">
+							</span>
+						</div>
+					</li>
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+						</div>
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							</a>
+							<span class="header-cart-item-info">
+							</span>
+						</div>
+					</li>
+				</ul>
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						Total: 0 won
+					</div>
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="#" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+						<a href="#" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Payment
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </br>
+<!-- header end -->
+
+<!-- Join form begin-->
+<section class="Form">
+	<div class="container"> 
+		<div class="row">
+			 <h3 class="font-weight-bold py-3"><strong>회원가입</strong></h3>
+			 <!-- <p style="color:gray;">회원 정보를 입력해 주세요.</p> 
+				 </br> -->
+				
+					<form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div class="form-row">
+					 <div class="col-lg-7">
+           <p style="color:red;">*<strong style="color:black;"> 사용자 ID</strong></p>
+            <input type="text" placeholder="ID를 입력해주세요." th:field="*{userId}" class="form-control my-3 p-3" style="width: 800px;">
+        </div>
+				 </div>
+				 <div class="form-row">
+					 <div class="col-lg-7">
+						 <p style="color:red;">*<strong style="color:black;"> 비밀번호</strong></p>
+            <input type="password" placeholder="비밀번호를 입력해주세요." th:field="*{password1}" class="form-control my-3 p-3" style="width: 800px;">         
+					 </div>
+				 </div>
+				 <div class="form-row">
+					 <div class="col-lg-7">
+						 <p style="color:red;">*<strong style="color:black;"> 비밀번호 확인</strong></p>
+						 <input type="password" placeholder="비밀번호를 다시 입력해주세요." th:field="*{password2}"class="form-control my-3 p-3" style="width: 800px;">           
+					 </div>
+				 </div>
+				 <div class="form-row">
+					 <div class="col-lg-7">
+						 <p style="color:red;">*<strong style="color:black;"> 이름</strong></p>
+						 <input type="text" placeholder="이름을 입력해주세요." th:field="*{userName}"class="form-control my-3 p-3" style="width: 800px;">           
+					 </div>
+				 </div>
+				 <div class="form-row">
+					 <div class="col-lg-7">
+						 <p style="color:red;">*<strong style="color:black;"> 이메일</strong></p>
+						 <input type="email" placeholder="이메일주소를 입력해주세요." th:field="*{email}" class="form-control my-3 p-3" style="width: 800px;">         
+					 </div>
+				 </div>
+				 <div class="form-row">
+					 <div class="col-lg-7">
+						 <p style="color:red;">*<strong style="color:black;"> 휴대폰 번호</strong></p>
+						 <input type="text" placeholder="휴대폰 번호를 입력해주세요." th:field="*{phoneNum}" class="form-control my-3 p-3" style="width: 800px;">           
+					 </div>
+				 </div>
+				 <div class="form-row">
+					 <div class="col-lg-7">
+						 <p style="color:red;">*<strong style="color:black;"> 주소</strong></p>
+						 <input type="text"  class="form-control my-3 p-3" id="sample6_postcode" placeholder="우편번호" style="width: 800px;">
+						 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 검색"> 
+						 <input type="text" class="form-control my-3 p-3" id="sample6_address" placeholder="주소" th:field="*{address}" style="width: 800px;">
+						 <input type="text" class="form-control my-3 p-3" id="sample6_detailAddress" placeholder="상세주소를 입력해주세요." style="width: 800px;">             
+						 <input type="text" class="form-control my-3 p-3" id="sample6_extraAddress"  placeholder="참고항목" style="width: 800px;">
+					 </div>
+				 </div>
+				 
+				 <div class="form-row">
+					 <div class="col-lg-12">
+						<button type="reset" class="btn2 mt-3 mb-5" style="width: 400px;"><strong>취소</strong></button>   
+						<button type="submit" class="btn1 mt-3 mb-5" style="width: 400px;"><strong>가입하기</strong></button>   
+					 </div>
+				 </div>
+			   </form>
+			</div>
+		</div>
+ </section> 
+<!-- Join form end--> 
+</br></br></br></br></br>
+  	<!-- footer -->
+	<footer class="bg3 p-t-75 p-b-32">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Categories
+					</h4>
+					<ul>
+						<li class="p-b-10">
+							<a href="home1" class="stext-107 cl7 hov-cl1 trans-04">
+								Home
+							</a>
+						</li>
+						<li class="p-b-10">
+							<a href="ci" class="stext-107 cl7 hov-cl1 trans-04">
+								Company Introduction
+							</a>
+						</li>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shop
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Customer Center
+					</h4>
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Notice
+							</a>
+						</li>
+						<li class="p-b-10">
+							<a href="faq" class="stext-107 cl7 hov-cl1 trans-04">
+								FAQ
+							</a>
+						</li>
+						<li class="p-b-10">
+							<a href="inqiry1" class="stext-107 cl7 hov-cl1 trans-04">
+								Inquiry
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						GET IN TOUCH
+					</h4>
+					<p class="stext-107 cl7 size-201">
+						Any questions? Let us know in store at Misa Gangbyeon Highway, Hanam-si, Gyeonggi-do or call us on 031-123-4567
+					</p>
+					<div class="p-t-27">
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-facebook"></i>
+						</a>
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-instagram"></i>
+						</a>
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-pinterest-p"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Newsletter
+					</h4>
+					<form>
+						<div class="wrap-input1 w-full p-b-4">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="todaysflower@gmail.com">
+							<div class="focus-input1 trans-04"></div>
+						</div>
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+								Subscribe
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="p-t-40">
+				<div class="flex-c-m flex-w p-b-18">
+					<a href="#" class="m-all-1">
+						
+						<!-- 수정 -->
+						<img th:src="@{/img/icons/icon-pay-01.png}">
+					</a>
+					<a href="#" class="m-all-1">
+						
+						<!-- 수정 -->
+						<img th:src="@{/img/icons/icon-pay-02.png}">
+					</a>
+					<a href="#" class="m-all-1">
+						<!-- 수정 -->
+						<img th:src="@{/img/icons/icon-pay-03.png}">
+					</a>
+					<a href="#" class="m-all-1">
+						
+						<!-- 수정 -->
+						<img th:src="@{/img/icons/icon-pay-04.png}">
+					</a>
+					<a href="#" class="m-all-1">
+						
+						<!-- 수정 -->
+						<img th:src="@{/img/icons/icon-pay-05.png}">
+					</a>
+				</div>
+				<p class="stext-107 cl6 txt-center">
+					
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+				</p>
+			</div>
+		</div>
+	</footer>
+	
+	<!-- back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>	
+	<!-- footer end -->
+	
+	
+	<!-- js -->
+	<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+	
+	<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+	
+	<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+	
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+	
+	<script th:src="@{/vendor/select2/select2.min.js}"></script>
+	
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+	
+	<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+	
+	<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+	
+	<script th:src="@{/vendor/slick/slick.min.js}"></script>
+	
+	<script th:src="@{/js/slick-custom.js}"></script>
+	
+	<script th:src="@{/vendor/parallax100/parallax100.js}"></script>
+	
+	<script>
+        $('.parallax100').parallax100();
+	</script>
+	
+	<script th:src="@{/vendor/MagnificPopup/jquery.magnific-popup.min.js}"></script>
+	
+	<script>
+		$('.gallery-lb').each(function() { // the containers for all your galleries
+			$(this).magnificPopup({
+		        delegate: 'a', // the selector for gallery item
+		        type: 'image',
+		        gallery: {
+		        	enabled:true
+		        },
+		        mainClass: 'mfp-fade'
+		    });
+		});
+	</script>
+	
+	<script th:src="@{/vendor/isotope/isotope.pkgd.min.js}"></script>
+	
+	<script th:src="@{/vendor/sweetalert/sweetalert.min.js}"></script>
+	
+	<script>
+		$('.js-addwish-b2').on('click', function(e){
+			e.preventDefault();
+		});
+		$('.js-addwish-b2').each(function(){
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
+		$('.js-addwish-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});
+		$('.js-addcart-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+	</script>
+	
+	<script th:src="@{/vendor/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
+	
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+			$(window).on('resize', function(){
+				ps.update();
+			});
+		});
+	</script>
+	
+	<script th:src="@{/js/main.js}"></script>
+	<!-- js end -->
+	
+	 <!-- JS bootstrap begin-->
+	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+	 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+ 	<!-- JS bootstrap end-->
+
+ <!-- 우편번호 API begin-->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	 <script>
+		 function sample6_execDaumPostcode() {
+			 new daum.Postcode({
+				 oncomplete: function(data) {
+					 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+					 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+					 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					 var addr = ''; // 주소 변수
+					 var extraAddr = ''; // 참고항목 변수
+
+					 //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+					 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+						 addr = data.roadAddress;
+					 } else { // 사용자가 지번 주소를 선택했을 경우(J)
+						 addr = data.jibunAddress;
+					 }
+
+					 // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+					 if(data.userSelectedType === 'R'){
+						 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+						 // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+						 if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+							 extraAddr += data.bname;
+						 }
+						 // 건물명이 있고, 공동주택일 경우 추가한다.
+						 if(data.buildingName !== '' && data.apartment === 'Y'){
+							 extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+						 }
+						 // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+						 if(extraAddr !== ''){
+							 extraAddr = ' (' + extraAddr + ')';
+						 }
+						 // 조합된 참고항목을 해당 필드에 넣는다.
+						 document.getElementById("sample6_extraAddress").value = extraAddr;
+					 
+					 } else {
+						 document.getElementById("sample6_extraAddress").value = '';
+					 }
+
+					 // 우편번호와 주소 정보를 해당 필드에 넣는다.
+					 document.getElementById('sample6_postcode').value = data.zonecode;
+					 document.getElementById("sample6_address").value = addr;
+					 // 커서를 상세주소 필드로 이동한다.
+					 document.getElementById("sample6_detailAddress").focus();
+				 }
+			 }).open();
+		 }
+	 </script>
+ <!-- 우편번호 api js end-->
+  </body>
+</html>

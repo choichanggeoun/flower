@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+layout:decorate="~{layouts/layout}">
+	
+<head>
+	<meta charset="utf-8">
+	<title>thymeleaf2</title>
+	<th:block layout:fragment="script"</th:block>
+	<th:block layout:fragment="css"</th:block>
+</head>
+
+<body>
+	<div th:replace="fragments/header::header"></div>
+	<br>
+	
+	<div th:replace="fragments/nav::nav"></div>
+	<br>
+	
+	<th:block layout:fragment="content">
+		<div align="center">
+   			<h2>Item</h2>
+   		</div>
+   		<div align="center">
+  			<img th:src="@{/img/item_image.jpg}" width="300" height="300"/>
+  		</div>
+  		<br>
+  		
+  		<div align="center">
+    		<b>Name</b>: <span th:text="${itemDto.item_name}"></span>
+  		</div>
+  		<br>
+  		
+   		<div align="center">
+    		<b>Detail</b>: <span th:text="${itemDto.item_detail}"></span>
+  		</div>
+  		<br>
+  		
+  		<div align="center">
+    		<b>Price</b>: <span th:text="${itemDto.item_price}"></span>
+  		</div>
+	</th:block>
+	<br>
+	
+	<div th:replace="fragments/footer::footer"></div>
+</body>
+
+</html>
